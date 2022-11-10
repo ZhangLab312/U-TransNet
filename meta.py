@@ -7,7 +7,7 @@ from torch import optim
 import numpy as np
 from tqdm import tqdm
 from util import make_functional
-from U-TransNet import U-TransNet
+from U_TransNet_meta import U_TransNet
 
 import read_data
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
