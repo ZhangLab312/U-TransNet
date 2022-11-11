@@ -19,8 +19,8 @@ def Get_DNA_Sequence(cell,TF_name,length):
     z_train = []
     zero_vector = [0., 0., 0., 0., 0., 0., 0., 0.]
     txt = []
-    pos_file = open('./data/' + cell + "/" + TF_name + "_pos.fasta",'r')
-    neg_file = open('./data/' + cell + "/" + TF_name + "_neg.fasta",'r')
+    pos_file = open('./data/1001/' + TF_name + "/" + cell + "_pos.fasta",'r')
+    neg_file = open('./data/1001/' + TF_name + "/" + cell + "_neg.fasta",'r')
     sample = []
     pos_num = 0
     neg_num = 0
@@ -120,8 +120,8 @@ gene_map = {
 }
 # train = pd.concat([a,b]).iloc[:,3:-1].fillna(0)
 def Get_TF_signal(cell, TF_name):
-    TF_signal_pos = pd.read_table('./data/' + cell + "/" + TF_name + "_chip_seq_pos.fasta", sep=' ', header=None)
-    TF_signal_neg = pd.read_table('./data/' + cell + "/" + TF_name + "_chip_seq_neg.fasta", sep=' ', header=None)
+    TF_signal_pos = pd.read_table('./data/1001/' + TF_name + "/" + cell + "_chip_seq_pos.fasta", sep=' ', header=None)
+    TF_signal_neg = pd.read_table('./data/1001/' + TF_name + "/" + cell + "_chip_seq_neg.fasta", sep=' ', header=None)
     TF_signal = pd.concat([TF_signal_pos,TF_signal_neg]).iloc[:,3:].fillna(0) #nan 变为0
     TF_signal = np.array(TF_signal,dtype="float32")
     np.random.seed(1)
@@ -130,8 +130,8 @@ def Get_TF_signal(cell, TF_name):
     return TF_signal
 
 def Get_DNase_Score(cell, TF_name):
-    DNase_pos = pd.read_table('./data/' + cell + "/" + TF_name + "_DNase_pos.fasta", sep=' ', header=None)
-    DNase_neg = pd.read_table('./data/' + cell + "/" + TF_name + "_DNase_neg.fasta", sep=' ', header=None)
+    DNase_pos = pd.read_table('./data/1001/' + TF_name + "/" + cell + "_DNase_pos.fasta", sep=' ', header=None)
+    DNase_neg = pd.read_table('./data/1001/' + TF_name + "/" + cell + "_DNase_neg.fasta", sep=' ', header=None)
     DNase = pd.concat([DNase_pos,DNase_neg]).iloc[:,3:].fillna(0) #nan 变为0
     DNase = np.array(DNase,dtype="float32")
     np.random.seed(1)
@@ -143,8 +143,8 @@ def Get_Histone(cell, TF_name, histone_name, num, length):
     Histone = np.zeros((num, len(histone_name), length))
     i = 0
     for name in histone_name:
-        histone_pos = pd.read_table('./data/' + cell + "/" + TF_name + "_" + name + "_pos.fasta", sep=' ', header=None)
-        histone_neg = pd.read_table('./data/' + cell + "/" + TF_name + "_" + name + "_neg.fasta", sep=' ', header=None)
+        histone_pos = pd.read_table('./data/1001/' + TF_name + "/" + cell + "_" + name + "_pos.fasta", sep=' ', header=None)
+        histone_neg = pd.read_table('./data/1001/' + TF_name + "/" + cell +  "_" + name + "_neg.fasta", sep=' ', header=None)
         histone = pd.concat([histone_pos,histone_neg]).iloc[:,3:].fillna(0)
         histone = np.array(histone, dtype="float32")
         np.random.seed(1)
