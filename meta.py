@@ -176,7 +176,7 @@ class Meta(nn.Module):
                 for i in range(task_num):
                     self.net.to(device)
                     inputs, labels = data[ 0 ].to(device), data[ 1 ].to(device)
-                    x_qry, y_qry = ValidateLoader.dataset[np.random.choice(range(len(TestLoader.dataset)), 64)]
+                    x_qry, y_qry = ValidateLoader.dataset[np.random.choice(range(len(ValidateLoader.dataset)), 64)]
                     x_qry = x_qry.to(device)
                     y_qry = y_qry.to(device)
                     logits = self.net(inputs.to(device))
@@ -222,7 +222,7 @@ class Meta(nn.Module):
             # aver_t = torch.rand(task_num, x_test.size(0), 1001).to(device)
             # aver_p = torch.rand(task_num, x_test.size(0), 1001).to(device)
             with torch.no_grad():
-                for ff, data in enumerate(TrainLoader, 0):
+                for ff, data in enumerate(TestLoader, 0):
                 # for valid_samples, valid_labels in TestLoader:  #
                     valid_samples, valid_labels = data[0], data[1],
                     for i in range(task_num):
